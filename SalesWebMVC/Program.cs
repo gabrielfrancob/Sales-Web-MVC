@@ -4,15 +4,12 @@ using SalesWebMVC.Data;
 
 var serverVersion = new MySqlServerVersion(new Version(8, 0, 31));
 
-
-
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<SalesWebMVCContext>(options =>
     options.UseMySql(builder.Configuration.GetConnectionString("SalesWebMVCContext"), serverVersion));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
