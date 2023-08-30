@@ -17,17 +17,13 @@ namespace SalesWebMVC.Controllers
             _sellerService = sellerService;
             _departmentsService = departmentsService;
         }
-        public IActionResult Index()
-        {
-            var list = _sellerService.FindAll();
-            return View(list);
-        }
 
-        public IActionResult Create()
+        [HttpGet]
+        [ValidateAntiForgeryToken]
+        public IActionResult FindById(int id)
         {
-            var departments = _departmentsService.FindAll();
-            var viewModel = new SellerFormViewModel { Departments = departments };
-            return View(viewModel);
+            var seller = _sellerService.FindById(id);
+            return RedirectToAction(nameof(Details));
         }
 
         [HttpPost]
@@ -45,6 +41,28 @@ namespace SalesWebMVC.Controllers
             _sellerService.Remove(id);
             return RedirectToAction(nameof(Index));
         }
+        public IActionResult Details(int id)
+        {
+            if (id == null) return NotFound();
+
+            var obj = _sellerService.FindById(id);
+            if (obj == null) return NotFound();
+
+            return View(obj);
+        }
+        public IActionResult Index()
+        {
+            var list = _sellerService.FindAll();
+            return View(list);
+        }
+
+        public IActionResult Create()
+        {
+            var departments = _departmentsService.FindAll();
+            var viewModel = new SellerFormViewModel { Departments = departments };
+            return View(viewModel);
+        }
+
 
         public IActionResult Delete(int? id)
         {
