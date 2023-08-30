@@ -6,6 +6,7 @@ namespace SalesWebMVC.Models
     {
         public int Id { get; set; }
         [Display(Name = "Nome")]
+        [Required]
         public string Name { get; set; }
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
