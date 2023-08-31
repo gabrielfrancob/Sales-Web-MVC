@@ -15,6 +15,7 @@ builder.Services.AddDbContext<SalesWebMVCContext>(options =>
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<SellerService>();
 builder.Services.AddScoped<DepartmentService>();
+builder.Services.AddScoped<SalesRecordsService>();
 var app = builder.Build();
 
 var ptBr = new CultureInfo("pt-BR");
